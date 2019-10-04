@@ -9,6 +9,8 @@ let downButton = null;
 let leftButton = null;
 let rightButton = null;
 
+
+let shuttleImage = null;
 let shuttleBackground = null;
 let spaceShuttleHeight = null;
 let flightStatus = null;
@@ -18,9 +20,17 @@ function init() {
     landButton = document.getElementById("landing");
     abortButton = document.getElementById("missionAbort");
     
+    upButton = document.getElementById("up");
+    downButton = document.getElementById("down");
+    leftButton = document.getElementById("left");
+    rightButton = document.getElementById("right");
+    
+    shuttleImage = document.getElementById("rocket");
     shuttleBackground = document.getElementById("shuttleBackground");
     flightStatus = document.getElementById("flightStatus");
     spaceShuttleHeight = document.getElementById("spaceShuttleHeight");
+    
+    let shuttlePosition = 0;
         
     takeoffButton.addEventListener("click", function() {
         let input = window.confirm("Confirm that the shuttle is ready for takeoff.");
@@ -47,8 +57,30 @@ function init() {
             shuttleBackground.style.backgroundColor = "green";
             spaceShuttleHeight.innerHTML = "0";
         }
-        
     });
+    
+    upButton.addEventListener("click", function() {
+        let currentHeight = Number(spaceShuttleHeight.innerHTML);
+        currentHeight += 10000;
+        spaceShuttleHeight.innerHTML = String(currentHeight);
+    });
+    
+    downButton.addEventListener("click", function() {
+        let currentHeight = Number(spaceShuttleHeight.innerHTML);
+        currentHeight -= 10000;
+        spaceShuttleHeight.innerHTML = String(currentHeight);
+    });
+    
+    leftButton.addEventListener("click", function() {
+        shuttlePosition -= 10;
+        shuttleImage.style.left = String(shuttlePosition) + 'px';
+    });
+    
+    rightButton.addEventListener("click", function() {
+        shuttlePosition += 10;
+        shuttleImage.style.left = String(shuttlePosition) + 'px';
+    });
+    
 }
 
 window.onload = init;
